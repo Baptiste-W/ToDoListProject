@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+<style>
+
+</style>
+
+    <nav class="navbar navbar-light">
+        <span id="brandTitle"class="navbar-brand mb-0 h1">Komplete</span>
+    </nav>
+
+    <div class="container-fluid">
+    <div class="row">
+    <div id="listContainer" class="col">
+        <H6> Mes listes </H6>
+        <ul>
+                {% for liste in listes %}
+
+                    <li class="today"><img class="listIcon">{{ liste.listName }}</li>
+                {% endfor %}
+            <hr>
+            <li><img class="listIcon" src="/Pictures/circle-plus-solid.svg"/> Créer une liste</li>
+        </ul>
+    </div>
+    <div class="col-10">
+        <h2>Mes listes</h2>
+        <div id="taskContainer1" >
+            <h4>Refonte UX - Fire Project</h4>
+            <br>
+            <div>
+                <ul>
+                    <li class="today"><img class="listIcon" src="/Pictures/calendar-day-solid.svg"/>Délimiter les use cases</li>
+                    <li class="thisWeek"><img class="listIcon" src="/Pictures/calendar-week-solid.svg"/>Planifier un workshop avec les responsables</li>
+                    <li class="thisMonth"><img class="listIcon" src="/Pictures/calendar-days-solid.svg"/>Maquetter les premiers visuels</li>
+                    <br>
+                    <li> Priorité : </li>
+                </ul>
+            </div>
+        </div>
+    <div id="taskContainer1" >
+        <h4>Refonte UX - Fire Project</h4>
+        <br>
+        <div>
+            <ul>
+                <li class="today"><img class="listIcon" src="/Pictures/calendar-day-solid.svg"/>Délimiter les use cases</li>
+                <li class="thisWeek"><img class="listIcon" src="/Pictures/calendar-week-solid.svg"/>Planifier un workshop avec les responsables</li>
+                <li class="thisMonth"><img class="listIcon" src="/Pictures/calendar-days-solid.svg"/>Maquetter les premiers visuels</li>
+                <br>
+                <li> Priorité : </li>
+            </ul>
+        </div>
+    </div>
+
+
+{#    {% for liste in listes %}#}
+{#        <br>#}
+{#        <div class=" row d-flex justify-content-center">#}
+{#            <h4 class="">{{ liste.listName }}</h4>#}
+{#        </div>#}
+
+{#        {% for tache in liste.tache %}#}
+{#            {{ tache.taskName }}#}
+{#        {% endfor %}#}
+{#    {% endfor %}#}
+{% endblock %}
