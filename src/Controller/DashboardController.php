@@ -24,7 +24,28 @@ class DashboardController extends AbstractController
 
         return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
+            'listesMenu' => $listes,
             'listes' => $listes
+        ]);
+    }
+
+    /**
+     * @Route("/dashboard/{listName}", name="dashboard_list")
+     */
+    public function list($listName, SessionInterface $session, ListesRepository  $listesRepository): Response
+    {
+        if (!$session->get('user')) {
+            return $this->redirectToRoute('login');
+        }
+
+
+        $liste = $listesRepository->findOneBy(['listName' => $listName]);
+        $listesMenu = $listesRepository->findBy(['user' => $session->get('user')]);
+
+        return $this->render('dashboard/index.html.twig', [
+            'controller_name' => 'DashboardController',
+            'listes' => [$liste],
+            'listesMenu' => $listesMenu
         ]);
     }
 }

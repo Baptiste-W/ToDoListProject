@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\UsersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -32,6 +33,7 @@ class UsersController extends AbstractController
                 return $this->redirectToRoute("dashboard");
             }
         }
+
         return $this->render('users/login.html.twig', [
             'controller_name' => 'UsersController',
         ]);
