@@ -14,7 +14,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ListController extends AbstractController
 {
-    #[Route('/list', name: 'create_list', methods: ['POST'])]
+    /**
+     * @Route("/list", name="create_list", methods={"POST"})
+     */
     public function create(Request $request, ManagerRegistry $registry, SessionInterface $session, UsersRepository $usersRepository): JsonResponse
     {
         if (!$request->request->get('nom')) {
@@ -23,12 +25,24 @@ class ListController extends AbstractController
 
         $list = new Listes();
         $list->setlistName($request->request->get('nom'));
-        $list->setUsers($usersRepository->find($session->get('user')->getId()));
+        $list->setUser($usersRepository->find($session->get('user')->getId()));
 
         $entityManager = $registry->getManager();
         $entityManager->persist($list);
         $entityManager->flush();
 
-        return new JsonResponse(['message' => 'Liste créee'], Response::HTTP_CREATED);
+        return new JsonResponse(['message' => 'Liste crée'], Response::HTTP_CREATED);
+    }
+
+    /**
+     * @Route("/listes/{id}/delete", name="liste_delete", methods={"GET"})
+     */
+    public function deleteList(Listes $listes, ManagerRegistry $registry)
+    {
+        $entityManager = $registry->getManager();
+        $entityManager->remove($listes);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('dashboard');
     }
 }

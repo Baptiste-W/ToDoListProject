@@ -31,7 +31,7 @@ class Listes
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=Taches::class, mappedBy="listes")
+     * @ORM\OneToMany(targetEntity=Taches::class, mappedBy="listes", cascade={"remove"})
      */
     private $tache;
 
@@ -96,5 +96,21 @@ class Listes
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 }

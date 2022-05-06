@@ -17,54 +17,76 @@
         <a href="{{ path('dashboard') }}"><h6>Mes listes</h6></a>
         <ul>
             {% for liste in listesMenu %}
-                <ul>
-                    <input type="checkbox" class="listName" name="listName">
+                <ul id="myList">
+
                     <a href="{{ path('dashboard_list', { 'listName': liste.listName } ) }}">
+                        <img class="listIcons" src="/Pictures/tag-solid.svg">
                         <label for="listName">{{ liste.listName }}</label>
                     </a>
                 </ul>
             {% endfor %}
             <hr>
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><img
-                        class="listIcon" src="/Pictures/circle-plus-solid.svg"/> Créer une liste
+            <button type="button" class="btn btn-primary waves-effect" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                Créer une nouvelle liste
             </button>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            <!-- Modal CREATE LIST -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Créer une liste</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close " data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input id="createList" type="text" class="form-control"/>
+                            <input type="text" id="createList"/>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button id="saveCreateList" type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close
+                            </button>
+                            <button id="saveCreateList" type="button" class="btn btn-primary waves-effect">Save
+                                changes
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </ul>
     </div>
-
 
     <div class="col-10">
         <h2>Mes listes</h2>
         {% for liste in listes %}
             <div id="taskContainer1">
-                <h4>{{ liste.listName }}</h4>
+                <div class="row">
+                    <div class="taskHeader col-6">
+                        <h4>{{ liste.listName }}</h4>
+                    </div>
+                    <div class="offset-1 controlButtonsList col">
+                        <button type="button" class="btn-sm btn-primary waves-effect"><span
+                                    class="sprite sprite-add-btn">+ Tâche</span>
+                        </button>
+                    </div>
+                    <div class="col-md-auto">
+                        <a href="{{ path('liste_delete', {id: liste.id}) }}">
+                            <button class="btn-sm btn-primary waves-effect"><span
+                                        class="sprite sprite-add-btn">Erase List</span></button>
+                        </a>
+                    </div>
+                </div>
                 <br>
                 <div>
-                    <ul id="myList">
+                    <ul>
                         {% for tache in liste.tache %}
                             <ul>
-                                <input type="checkbox" class="listName" name="listName">
+                                <input type="checkbox" class="listName" data-taskId="{{ tache.id }}" name="listName">
+                                <a><img class="flagPriority" src="/Pictures/flag-solid.svg"></a>
                                 <label for="listName">{{ tache.taskName }}</label>
                             </ul>
                         {% endfor %}
@@ -74,7 +96,6 @@
             </div>
         {% endfor %}
     </div>
-
 
 
 {% endblock %}

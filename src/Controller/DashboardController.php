@@ -13,7 +13,6 @@ class DashboardController extends AbstractController
     /**
      * @Route("/dashboard", name="dashboard")
      */
-
     public function index(SessionInterface $session, ListesRepository  $listesRepository): Response
     {
         if (!$session->get('user')) {
